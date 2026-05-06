@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SPMS Panel - Vehicle Entry</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f1f2f6;
+      color: #333;
+    }
+
+    .wrapper {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 220px;
+      background: #2f3542;
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    .logo {
+      padding: 18px 16px;
+      font-size: 22px;
+      font-weight: bold;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .logo i {
+      margin-right: 8px;
+    }
+
+    .menu {
+      padding-top: 10px;
+    }
+
+    .menu a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 18px;
+      color: #dfe4ea;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    .menu a:hover,
+    .menu a.active {
+      background: #0d6efd;
+      color: #fff;
+    }
+
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      height: 60px;
+      background: #343a40;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 14px;
+      padding: 0 20px;
+    }
+
+    .welcome {
+      font-size: 13px;
+    }
+
+    .logout-btn {
+      background: #0d6efd;
+      color: #fff;
+      border: none;
+      padding: 7px 14px;
+      border-radius: 4px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .card h3 {
+      margin-bottom: 16px;
+      font-size: 18px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .btn {
+      background: #0d6efd;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .btn-secondary {
+      background: #6c757d;
+    }
+
+    .limits-list {
+      list-style: none;
+    }
+
+    .limits-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+    }
+
+    .badge {
+      background: #28a745;
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      background: #fff;
+    }
+    
+    table th,
+    table td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    table th {
+      background: #f8f9fa;
+    }
+
+    .status {
+      background: #d1e7dd;
+      color: #0f5132;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .table-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 15px;
+      font-size: 13px;
+    }
+
+    .pagination {
+      display: flex;
+      gap: 8px;
+    }
+
+    .pagination button {
+      border: 1px solid #ccc;
+      background: #fff;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .pagination .active-page {
+      background: #0d6efd;
+      color: #fff;
+      border-color: #0d6efd;
+    }
+    .status {
+    background: #0d6efd;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+     }
+
+    .footer {
+      text-align: center;
+      padding: 14px;
+      background-color: #2f3542;
+      font-size: 13px;
+      color: #666;
+      border-top: 1px solid #ddd;
+    }
+     
+
+    @media (max-width: 768px) {
+      .wrapper {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        min-height: auto;
+      }
+
+      .topbar {
+        justify-content: space-between;
+      }
+
+      .content {
+        padding: 16px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .table-footer {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <aside class="sidebar">
+      <div class="logo"><i class="fa-solid fa-car-side"></i> SPMS Panel</div>
+      <nav class="menu">
+        <a href="dashbord.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+        <a href="category.html"><i class="fa-solid fa-folder"></i> Category</a>
+        <a href="vehicle-entry.html" class="active"><i class="fa-solid fa-car"></i> Vehicle Entry</a>
+        <a href="manage.html"><i class="fa-solid fa-list"></i> Manage Vehicles</a>
+        <a href="report.html"><i class="fa-solid fa-chart-column"></i> Reports</a>
+        <a href="search.html"><i class="fa-solid fa-magnifying-glass"></i> Search</a>
+        <a href="account.html"><i class="fa-solid fa-gear"></i> Account Setting</a>
+        <a href="#"><i class="fa-solid fa-power-off"></i> Logout</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div class="welcome"><i class="fa-solid fa-circle-user"></i> Welcome, Administrator</div>
+        <button class="logout-btn">Logout</button>
+      </div>
+
+      <div class="content">
+        <div class="grid">
+          <div class="card">
+            <h3>Add Vehicle</h3>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Vehicle Number</label>
+                <input type="text" class="form-control" placeholder="Enter vehicle number">
+              </div>
+
+              <div class="form-group">
+                <label>Vehicle Type</label>
+                <select class="form-control">
+                  <option>Select Vehicle Type</option>
+                  <option>Car</option>
+                  <option>Motorcycle</option>
+                  <option>Mini Van</option>
+                  <option>Pickup Van</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Parking Area Number</label>
+              <select class="form-control">
+                <option>Select Parking Area Number</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Parking Charge</label>
+              <select class="form-control">
+                <option>Select Parking Charge</option>
+                <option>₹50</option>
+                <option>₹100</option>
+                <option>₹150</option>
+              </select>
+            </div>
+
+            <button class="btn">Add Vehicle</button>
+          </div>
+
+          <div class="card">
+            <h3>Vehicle Limitations</h3>
+            <ul class="limits-list">
+              <li>Car Limit <span><span class="badge">17</span> / 18</span></li>
+              <li>Motorcycle Limit <span><span class="badge">26</span> / 26</span></li>
+              <li>Mini Van Limit <span><span class="badge">8</span> / 8</span></li>
+              <li>Pickup Van <span><span class="badge">11</span> / 11</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Current Vehicles</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Vehicle Number</th>
+                <th>Area Number</th>
+                <th>Arrival Time</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>36</td>
+                <td>GBN-2306</td>
+                <td>2</td>
+                <td>2022-07-04 10:43:15</td>
+                <td><span class="status">Parked</span></td>
+                <td><button class="btn btn-secondary">Receipt</button></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="table-footer">
+            <small>Showing 1 to 1 of 1 entries</small>
+            <div class="pagination">
+              <button>Previous</button>
+              <button class="active-page">1</button>
+              <button>Next</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer">
+        © 2026 SPMS | All Rights Reserved
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

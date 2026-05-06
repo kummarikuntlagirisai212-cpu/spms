@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SPMS Panel - Account Setting</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f1f2f6;
+      color: #333;
+    }
+
+    .wrapper {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 220px;
+      background: #2f3542;
+      color: #fff;
+      min-height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+    }
+
+    .logo {
+      padding: 18px 16px;
+      font-size: 22px;
+      font-weight: bold;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .logo i {
+      margin-right: 8px;
+    }
+
+    .menu {
+      padding-top: 10px;
+    }
+
+    .menu a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 18px;
+      color: #dfe4ea;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    .menu a:hover {
+      background: #3b4252;
+      color: #fff;
+    }
+
+    .menu a.active {
+      background: #0d6efd;
+      color: #fff;
+    }
+
+    .main {
+      flex: 1;
+      margin-left: 220px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .topbar {
+      height: 60px;
+      background: #343a40;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 14px;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .welcome {
+      font-size: 13px;
+    }
+
+    .logout-btn {
+      background: #0d6efd;
+      color: #fff;
+      border: none;
+      padding: 7px 14px;
+      border-radius: 3px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .content {
+      padding: 20px;
+      flex: 1;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      padding: 22px 18px;
+      border-radius: 8px;
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .card h3 {
+      font-size: 18px;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .card p {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .blue { background: #0d6efd; }
+    .green { background: #198754; }
+    .yellow { background: #ffc107; color: #222; }
+    .red { background: #dc3545; }
+
+    .report-section {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+
+    .report-title {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .report-title span {
+      color: #666;
+      font-weight: normal;
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      margin-bottom: 8px;
+      font-size: 15px;
+      color: #333;
+    }
+
+    .form-group input,
+    .form-group select {
+      padding: 11px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      outline: none;
+      font-size: 15px;
+      background: #fff;
+    }
+
+    .generate-btn-wrap {
+      display: flex;
+      align-items: end;
+    }
+
+    .generate-btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      background: #6c757d;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .search-box {
+      display: flex;
+      margin: 20px 0;
+    }
+
+    .search-box input {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-right: none;
+      border-radius: 6px 0 0 6px;
+      font-size: 15px;
+    }
+
+    .search-box button {
+      width: 55px;
+      border: none;
+      background: #6c757d;
+      color: #fff;
+      border-radius: 0 6px 6px 0;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 900px;
+    }
+
+    table thead {
+      background: #1f2630;
+      color: #fff;
+    }
+
+    table th,
+    table td {
+      padding: 12px 10px;
+      border: 1px solid #ddd;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .paid { background: #198754; }
+    .pending { background: #dc3545; }
+    .parked { background: #0d6efd; }
+    .wrong { background: #ffc107; color: #222; }
+
+    .footer {
+      text-align: center;
+      padding: 14px 10px;
+      background: #fff;
+      border-top: 1px solid #ddd;
+      font-size: 14px;
+      color: #666;
+    }
+
+    @media (max-width: 1100px) {
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .filters {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 200px;
+      }
+
+      .main {
+        margin-left: 200px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .wrapper {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        position: relative;
+        width: 100%;
+        min-height: auto;
+      }
+
+      .main {
+        margin-left: 0;
+      }
+
+      .topbar {
+        justify-content: space-between;
+      }
+
+      .cards,
+      .filters {
+        grid-template-columns: 1fr;
+      }
+
+      .search-box {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .search-box input {
+        border-right: 1px solid #ccc;
+        border-radius: 6px;
+      }
+
+      .search-box button {
+        width: 100%;
+        border-radius: 6px;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <aside class="sidebar">
+      <div class="logo"><i class="fa-solid fa-car-side"></i> SPMS Panel</div>
+
+      <nav class="menu">
+        <a href="dashbord.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+        <a href="category.html"><i class="fa-solid fa-folder"></i> Category</a>
+        <a href="vehicle entry.html"><i class="fa-solid fa-car"></i> Vehicle Entry</a>
+        <a href="manage.html"><i class="fa-solid fa-list"></i> Manage Vehicles</a>
+        <a href="report.html" class="active"><i class="fa-solid fa-chart-column"></i> Reports</a>
+        <a href="s.html"><i class="fa-solid fa-magnifying-glass"></i> Search</a>
+        <a href="account.html" ><i class="fa-solid fa-gear"></i> Account Setting</a>
+        <a href="loginpage.html"><i class="fa-solid fa-power-off"></i> Logout</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div class="welcome"><i class="fa-solid fa-circle-user"></i> Welcome, Administrator</div>
+        <button class="logout-btn">Logout</button>
+      </div>
+
+      <div class="content">
+        <div class="cards">
+          <div class="card blue">
+            <h3>Total Vehicles</h3>
+            <p>25</p>
+          </div>
+          <div class="card green">
+            <h3>Total Revenue</h3>
+            <p>$150</p>
+          </div>
+          <div class="card yellow">
+            <h3>Wrong Parking</h3>
+            <p>3</p>
+          </div>
+          <div class="card red">
+            <h3>Pending Payments</h3>
+            <p>5</p>
+          </div>
+        </div>
+
+        <div class="report-section">
+          <div class="report-title">
+            Reports | <span>Filter records by date range</span>
+          </div>
+
+          <div class="filters">
+            <div class="form-group">
+              <label>From Date</label>
+              <input type="date">
+            </div>
+
+            <div class="form-group">
+              <label>To Date</label>
+              <input type="date">
+            </div>
+
+            <div class="form-group">
+              <label>Vehicle Type</label>
+              <select>
+                <option>All</option>
+                <option>Car Type 101</option>
+                <option>Minibus</option>
+                <option>Bike</option>
+              </select>
+            </div>
+
+            <div class="generate-btn-wrap">
+              <button class="generate-btn">Generate</button>
+            </div>
+          </div>
+
+          <div class="search-box">
+            <input type="text" placeholder="Enter Vehicle Number">
+            <button>🔍</button>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Vehicle Number</th>
+                  <th>Type</th>
+                  <th>Area</th>
+                  <th>Charge</th>
+                  <th>Payment</th>
+                  <th>Parking Status</th>
+                  <th>Entry</th>
+                  <th>Exit</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>GBN-2306</td>
+                  <td>Car Type 101</td>
+                  <td>1</td>
+                  <td>$7</td>
+                  <td><span class="badge paid">Paid</span></td>
+                  <td><span class="badge wrong">Wrong Parking</span></td>
+                  <td>2022-07-04 09:29:13</td>
+                  <td>2022-07-04 11:24:26</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>ABC-4321</td>
+                  <td>Minibus</td>
+                  <td>9</td>
+                  <td>$6</td>
+                  <td><span class="badge pending">Pending</span></td>
+                  <td><span class="badge parked">Parked</span></td>
+                  <td>2022-07-04 14:09:14</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>XYZ-9087</td>
+                  <td>Bike</td>
+                  <td>4</td>
+                  <td>$3</td>
+                  <td><span class="badge paid">Paid</span></td>
+                  <td><span class="badge parked">Parked</span></td>
+                  <td>2022-07-05 08:10:00</td>
+                  <td>2022-07-05 09:00:00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer">
+        © 2026 SPMS | All Rights Reserved
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

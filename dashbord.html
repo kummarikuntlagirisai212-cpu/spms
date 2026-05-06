@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SPMS Panel - Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+  
+  
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #e9ecef;
+      color: #333;
+    }
+
+    .wrapper {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 220px;
+      background: #2f3542;
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    .logo {
+      padding: 20px 14px;
+      font-size: 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .menu {
+      padding-top: 18px;
+    }
+
+    .menu a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 18px;
+      color: #dfe4ea;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    .menu a:hover,
+    .menu a.active {
+      background: #3b4252;
+      color: #fff;
+    }
+
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      height: 55px;
+      background: #343a40;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+    }
+
+    .topbar-left {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+    }
+
+    .logout-btn {
+      background: #0d6efd;
+      color: #fff;
+      border: none;
+      padding: 7px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .content-area {
+      padding: 18px;
+      background: #e9ecef;
+      flex: 1;
+    }
+
+    .dashboard-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .dash-card {
+      position: relative;
+      min-height: 92px;
+      border-radius: 4px;
+      padding: 16px 18px;
+      color: #fff;
+    }
+
+    .card-number {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .dash-card i {
+      position: absolute;
+      right: 18px;
+      bottom: 14px;
+      font-size: 31px;
+    }
+
+    .card1 {
+      background: #17a2b8;
+    }
+
+    .card2 {
+      background: #343a40;
+    }
+
+    .card3 {
+      background: #dc3545;
+    }
+
+    .card4 {
+      background: #ffc107;
+      color: #111;
+    }
+
+    .card5 {
+      background: #6c757d;
+    }
+
+    .card6 {
+      background: #0d6efd;
+    }
+
+    .card4 i {
+      color: #111;
+    }
+
+    footer {
+      background: #fff;
+      text-align: center;
+      padding: 12px;
+      font-size: 13px;
+      color: #666;
+      border-top: 1px solid #ddd;
+    }
+    .menu .active {
+      background: #0d6efd;
+      color: #fff;
+    }
+
+
+    @media (max-width: 992px) {
+      .dashboard-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .wrapper {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        min-height: auto;
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 4px;
+        height: auto;
+        padding: 12px 15px;
+      }
+
+      .content-area {
+        padding: 15px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .dashboard-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <aside class="sidebar">
+      <div class="logo">
+        <i class="fa-solid fa-car-side"></i>
+        <span>SPMS Panel</span>
+      </div>
+
+      <nav class="menu">
+        <a href="dashbord.html" class="active"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+        <a href="category.html"><i class="fa-solid fa-folder"></i> Category</a>
+        <a href="vehicle entry.html"><i class="fa-solid fa-car"></i> Vehicle Entry</a>
+        <a href="manage.html"><i class="fa-solid fa-gear"></i> Manage Vehicles</a>
+        <a href="report.html"><i class="fa-solid fa-chart-column"></i> Reports</a>
+        <a href="s.html"><i class="fa-solid fa-magnifying-glass"></i> Search</a>
+        <a href="account.html"><i class="fa-solid fa-user-gear"></i> Account Setting</a>
+        <a href="loginpage.html"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="topbar">
+        <div class="topbar-left">Dashboard</div>
+        <div class="topbar-right">
+          <span>Welcome, Administrator</span>
+          <button class="logout-btn">Logout</button>
+        </div>
+      </div>
+
+      <section class="content-area">
+        <div class="dashboard-cards">
+          <div class="dash-card card1">
+            <div class="card-number">1</div>
+            <div class="card-title">Vehicles Parked</div>
+            <i class="bi bi-p-square"></i>
+          </div>
+
+          <div class="dash-card card2">
+            <div class="card-number">2</div>
+            <div class="card-title">Departed Vehicles</div>
+            <i class="bi bi-car-front"></i>
+          </div>
+
+          <div class="dash-card card3">
+            <div class="card-number">6</div>
+            <div class="card-title">Available Category</div>
+            <i class="bi bi-box"></i>
+          </div>
+
+          <div class="dash-card card4">
+            <div class="card-number">$18.00</div>
+            <div class="card-title">Total Earnings</div>
+            <i class="bi bi-currency-dollar"></i>
+          </div>
+
+          <div class="dash-card card5">
+            <div class="card-number">3</div>
+            <div class="card-title">Total Records</div>
+            <i class="bi bi-layers"></i>
+          </div>
+
+          <div class="dash-card card6">
+            <div class="card-number">74</div>
+            <div class="card-title">Total Parking Slots</div>
+            <i class="bi bi-check2-circle"></i>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        © 2026 SPMS Panel. All rights reserved.
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SPMS Panel - Account Setting</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f1f2f6;
+      color: #333;
+    }
+
+    .wrapper {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 220px;
+      background: #2f3542;
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    .logo {
+      padding: 18px 16px;
+      font-size: 22px;
+      font-weight: bold;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .logo i {
+      margin-right: 8px;
+    }
+
+    .menu {
+      padding-top: 10px;
+    }
+
+    .menu a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 18px;
+      color: #dfe4ea;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    .menu a:hover {
+      background: #3b4252;
+      color: #fff;
+    }
+
+    .menu a.active {
+      background: #0d6efd;
+      color: #fff;
+    }
+
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      height: 60px;
+      background: #343a40;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 14px;
+      padding: 0 20px;
+    }
+
+    .welcome {
+      font-size: 13px;
+    }
+
+    .logout-btn,
+    .done-btn,
+    .submit-btn {
+      background: #0d6efd;
+      color: #fff;
+      border: none;
+      padding: 7px 14px;
+      border-radius: 4px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    .page-card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    .page-card-header {
+      padding: 16px 20px;
+      font-size: 18px;
+      font-weight: bold;
+      border-bottom: 1px solid #e5e5e5;
+      background: #f8f9fa;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead {
+      background: #f1f2f6;
+    }
+
+    th,
+    td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid #eaeaea;
+      font-size: 14px;
+    }
+
+    th {
+      font-weight: 600;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .status.leaved {
+      background: #ffe5e5;
+      color: #d63031;
+    }
+
+    .status.parked {
+      background: #e5f9e7;
+      color: #27ae60;
+    }
+
+    .table-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      font-size: 14px;
+      background: #fff;
+    }
+
+    .pagination {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .page-btn,
+    .page-number {
+      padding: 6px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .page-number.active {
+      background: #0d6efd;
+      color: #fff;
+      border-color: #0d6efd;
+    }
+
+    .footer {
+      margin-top: auto;
+      padding: 14px 20px;
+      text-align: center;
+      font-size: 13px;
+      color: #666;
+      background: #fff;
+      border-top: 1px solid #ddd;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 180px;
+      }
+
+      .topbar {
+        justify-content: space-between;
+        padding: 0 14px;
+      }
+
+      .content {
+        padding: 16px;
+      }
+
+      th,
+      td {
+        font-size: 13px;
+        padding: 10px;
+      }
+
+      .table-footer {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <aside class="sidebar">
+      <div class="logo"><i class="fa-solid fa-car-side"></i> SPMS Panel</div>
+
+      <nav class="menu">
+        <a href="dashbord.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+        <a href="category.html"><i class="fa-solid fa-folder"></i> Category</a>
+        <a href="vehicle entry.html"><i class="fa-solid fa-car"></i> Vehicle Entry</a>
+        <a href="manage.html" class="active"><i class="fa-solid fa-list"></i> Manage Vehicles</a>
+        <a href="report.html"><i class="fa-solid fa-chart-column"></i> Reports</a>
+        <a href="s.html"><i class="fa-solid fa-magnifying-glass"></i> Search</a>
+        <a href="account.html" ><i class="fa-solid fa-gear"></i> Account Setting</a>
+        <a href="loginpage.html"><i class="fa-solid fa-power-off"></i> Logout</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div class="welcome"><i class="fa-solid fa-circle-user"></i> Welcome, Administrator</div>
+        <button class="logout-btn">Logout</button>
+      </div>
+
+      <div class="content">
+        <div class="page-card">
+          <div class="page-card-header">Manage Vehicles</div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Vehicle Number</th>
+                  <th>Type</th>
+                  <th>Area No.</th>
+                  <th>Charge</th>
+                  <th>Arrival Time</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>34</td>
+                  <td>GBN-2306</td>
+                  <td>Car Type 101</td>
+                  <td>1</td>
+                  <td>$7.00</td>
+                  <td>2022-07-04</td>
+                  <td><span class="status leaved">Leaved</span></td>
+                  <td><button class="done-btn">Done</button></td>
+                </tr>
+                <tr>
+                  <td>35</td>
+                  <td>ABC-1234</td>
+                  <td>Car Type 101</td>
+                  <td>1</td>
+                  <td>$7.00</td>
+                  <td>2022-07-04</td>
+                  <td><span class="status leaved">Leaved</span></td>
+                  <td><button class="done-btn">Done</button></td>
+                </tr>
+                <tr>
+                  <td>36</td>
+                  <td>GBN-2306</td>
+                  <td>Car</td>
+                  <td>2</td>
+                  <td>$4.00</td>
+                  <td>2022-07-04</td>
+                  <td><span class="status parked">Parked</span></td>
+                  <td><button class="done-btn">Done</button></td>
+                </tr>
+                <tr>
+                  <td>37</td>
+                  <td>CDM-104</td>
+                  <td>Category 102</td>
+                  <td>2</td>
+                  <td>$50.00</td>
+                  <td>2022-07-04</td>
+                  <td><span class="status leaved">Leaved</span></td>
+                  <td><button class="done-btn">Done</button></td>
+                </tr>
+                <tr>
+                  <td>38</td>
+                  <td>ABC-4321</td>
+                  <td>Minibus</td>
+                  <td>9</td>
+                  <td>$6.00</td>
+                  <td>2022-07-04</td>
+                  <td><span class="status leaved">Leaved</span></td>
+                  <td><button class="done-btn">Done</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-footer">
+            <div>Showing 1 to 5 of 5 entries</div>
+            <div class="pagination">
+              <span class="page-btn">Previous</span>
+              <span class="page-number active">1</span>
+              <span class="page-btn">Next</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer">
+        © 2026 SPMS | All Rights Reserved
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
